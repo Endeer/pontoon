@@ -11,12 +11,14 @@ from allauth.socialaccount.providers.fxa.provider import FirefoxAccountsProvider
 from allauth.socialaccount.providers.github.provider import GitHubProvider
 from allauth.socialaccount.providers.gitlab.provider import GitLabProvider
 from allauth.socialaccount.providers.google.provider import GoogleProvider
+from allauth.socialaccount.providers.discord.provider import DiscordProvider
 
 
 FXA_PROVIDER_ID = FirefoxAccountsProvider.id
 GITHUB_PROVIDER_ID = GitHubProvider.id
 GITLAB_PROVIDER_ID = GitLabProvider.id
 GOOGLE_PROVIDER_ID = GoogleProvider.id
+DISCORD_PROVIDER_ID = DiscordProvider.id
 
 
 class Command(BaseCommand):
@@ -58,6 +60,17 @@ class Command(BaseCommand):
             )
 
             self.update_provider(fxa_data)
+
+        # Check if DISCORD_* settings are configured
+        if settings.DISCORD_CLIENT_ID is not None and settings.DISCORD_SECRET_KEY is not None:
+            discord_data = dict(
+                name="Discord",
+                provider=DISCORD_PROVIDER_ID,
+                client_id=settings.DISCORD_CLIENT_ID,
+                secret=settings.DISCORD_SECRET_KEY,
+            )
+
+            self.update_provider(discord_data)
 
         # Check if GITHUB_* settings are configured
         if (

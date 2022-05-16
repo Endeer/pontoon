@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     "allauth.socialaccount.providers.github",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.gitlab",
+    "allauth.socialaccount.providers.discord",
     "notifications",
     "graphene_django",
     "django_ace",
@@ -833,7 +834,7 @@ CORS_URLS_REGEX = r"^/(pontoon\.js|graphql/?)$"
 SOCIALACCOUNT_ENABLED = True
 SOCIALACCOUNT_ADAPTER = "pontoon.base.adapter.PontoonSocialAdapter"
 
-# Supported values: 'django', 'fxa', 'github', 'gitlab', 'google'
+# Supported values: 'django', 'fxa', 'github', 'gitlab', 'google', 'discord'
 AUTHENTICATION_METHOD = os.environ.get("AUTHENTICATION_METHOD", "django")
 
 
@@ -857,6 +858,10 @@ FXA_SCOPE = ["profile:uid", "profile:display_name", "profile:email"]
 # Github
 GITHUB_CLIENT_ID = os.environ.get("GITHUB_CLIENT_ID")
 GITHUB_SECRET_KEY = os.environ.get("GITHUB_SECRET_KEY")
+
+# Discord
+DISCORD_CLIENT_ID = os.environ.get("DISCORD_CLIENT_ID")
+DISCORD_SECRET_KEY = os.environ.get("DISCORD_SECRET_KEY")
 
 # GitLab
 GITLAB_URL = os.environ.get("GITLAB_URL", "https://gitlab.com")
